@@ -1,9 +1,8 @@
-<!DOCTYPE html>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <html>
 <head>
-    <meta charset="utf-8" lang="en">
-    <title>MyChatroom</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>MyChatroom</title>
     <style>
         p {
             text-align: left;

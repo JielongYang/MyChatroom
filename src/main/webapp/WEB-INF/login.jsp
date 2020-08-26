@@ -1,12 +1,13 @@
-<!DOCTYPE html>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <html>
 	<head>
-		<meta charset="utf-8" lang="en">
+		<meta charset="UTF-8">
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 		<title>login</title>
 	</head>
 	<body>
 	<h1 align="middle">登录页面</h1>
-	<form action="/login">
+	<form action="login" method="post">
 	    <table border="0" align="center" >
 	        <tr>
 	            <td>用户名</td>
