@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -11,7 +11,7 @@
 	    <table border="0" align="center" >
 	        <tr>
 	            <td>用户名</td>
-	            <td><input type="text" name="name"></td>
+	            <td><input type="text" name="username"></td>
 	        </tr>
 	        <tr>
 	            <td>密码</td>
@@ -19,6 +19,7 @@
 	        </tr>
 	        <tr>
 	            <td><input type="submit" value="登录"></td>
+				<td>${msg}</td>
 	        </tr>
 	    </table>
 	</form>
