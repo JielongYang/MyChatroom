@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 @Controller
 public class loginController {
@@ -17,8 +19,9 @@ public class loginController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/login")
-    public String loginController(String username, String password, Model model) {
+
+    @RequestMapping(value = "/chatroom")
+    public String loginController(String username, String password, Model model, HttpSession session) {
         User checkUser = userService.getUSerByUsernameAndPassword(username, password);
 
         if (checkUser == null) {
@@ -30,13 +33,11 @@ public class loginController {
         return "chatroom";
     }
 
+
     @RequestMapping("/getUserById")
     public String getUserById(Integer id, Model model) {
-
         User user = userService.getUserById(id);
-
         model.addAttribute("user",user);
-
         return "user";
     }
 

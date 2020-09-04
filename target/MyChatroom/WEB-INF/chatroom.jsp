@@ -1,8 +1,10 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
+<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta charset="utf-8" lang="en">
     <title>MyChatroom</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <style>
         p {
             text-align: left;
@@ -15,7 +17,7 @@
     <h1>websocket聊天室</h1>
     <div style="width: 800px;border: 1px solid gray;height: 300px;">
         <div style="width: 200px;height: 300px;float: left;text-align: left;">
-            <p><span>当前在线:</span><span id="user_num">0</span></p>
+            <p><span>当前在线:</span><span id="user_num">${val}</span></p>
             <div id="user_list" style="overflow: auto;">
 
             </div>
@@ -29,15 +31,37 @@
 </div>
 </body>
 </html>
-
+<script src="https://www.jq22.com/jquery/jquery-3.3.1.js"></script>
 <script type="text/javascript">
-    // 存储用户名到全局变量,握手成功后发送给服务器
-    // var uname = prompt('请输入用户名', 'user' + uuid(8, 16));
-    // var ws = new WebSocket("ws://127.0.0.1:8080");
-    // ws.onopen = function () {
-    //     var data = "系统消息：建立连接成功";
-    //     listMsg(data);
-    // };
+<%--    发送请求获取当前登录用户名--%>
+//     var username;
+// $(function () {
+//     $.ajax({
+//         url:"getUsername",
+//         success:function (res) {
+//             username = res;
+//         },
+//         $("#user_list").html(res);
+//
+//         async:false
+//     });
+// })
+    var userinfo = eval("("+sessionStorage.getItem("userinfo")+")");
+    console.log(userinfo.username);
+    var encodeUserinfo = window.btoa(encodeURIComponent(sessionStorage.getItem("userinfo")));
+//websocket链接地址
+    var url = "ws://localhost:8080/MyChatroom/WebSocketLink/" + encodeUserinfo;
+    if ('WebSocket' in window) {
+        var ws = new WebSocket(url);
+    }else {
+        alert('当前浏览器不支持WebSocket')
+    }
+    ws.onopen = function () {
+        var data = "系统消息：建立连接成功";
+        var userNum = document.getElementById("user_num")
+        listMsg(data);
+        $("#user_list").html(userinfo.username);
+    };
 
     /**
      * 分析服务器返回信息
@@ -158,33 +182,4 @@
         ws.send(data);
     }
 
-    /**
-     * 生产一个全局唯一ID作为用户名的默认值;
-     *
-     * @param len
-     * @param radix
-     * @returns {string}
-     */
-    function uuid(len, radix) {
-        var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
-        var uuid = [], i;
-        radix = radix || chars.length;
-
-        if (len) {
-            for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random() * radix];
-        } else {
-            var r;
-
-            uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
-            uuid[14] = '4';
-
-            for (i = 0; i < 36; i++) {
-                if (!uuid[i]) {
-                    r = 0 | Math.random() * 16;
-                    uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
-                }
-            }
-        }
-        return uuid.join('');
-    }
 </script>
