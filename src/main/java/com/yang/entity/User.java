@@ -17,8 +17,9 @@ public class User {
         this.password = password;
     }
 
-    public User(String username) {
+    public User(String username,Session session) {
         this.username = username;
+        this.session = session;
     }
 
     public Integer getId() {
