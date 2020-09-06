@@ -1,17 +1,13 @@
 package com.yang.controller;
-
 import com.alibaba.fastjson.JSONObject;
 import com.yang.entity.User;
 import org.springframework.stereotype.Controller;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.concurrent.ConcurrentHashMap;
-
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
-
 import java.net.URLDecoder;
 import java.util.Base64;
 
@@ -19,8 +15,7 @@ import java.util.Base64;
 @Controller
 @ServerEndpoint("/WebSocketLink/{userinfo}")
 public class WebSocket {
-    private static int onlineCount = 0;
-    private static ConcurrentHashMap<String,User> root = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String,User> users = new ConcurrentHashMap<>();
     private User user;
 
     @OnOpen
@@ -30,22 +25,27 @@ public class WebSocket {
         String username = job.getString("username");
         User user = new User(username,session);
         this.user = user;
-        root.put(username,user);
-        addOnlineCount();
+        users.put(username,user);
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("type",0);
-        jsonObject.put("username",username);
-        //向除本用户外的其他用户推送该用户信息
-        for (String key:root.keySet()) {
-            root.get(key).getSession().getBasicRemote().sendText(jsonObject.toString());
+        jsonObject.put("type","login");
+        jsonObject.put("content",username);
+        jsonObject.put("namelist",users.keySet());
+        //向所有用户推送新用户进入消息
+        for (String key:users.keySet()) {
+            users.get(key).getSession().getBasicRemote().sendText(jsonObject.toString());
         }
 
 
     }
 
     @OnMessage
-    public void onMessage(String message) throws IOException {
-        System.out.println("onMessage");
+    public void onMessage(String message, Session session) throws IOException {
+        JSONObject jsob = JSONObject.parseObject(message);
+        System.out.println(jsob);
+        for (String key:users.keySet()) {
+            users.get(key).getSession().getBasicRemote().sendText(jsob.toString());
+        }
+
 
 
         return;
@@ -71,15 +71,4 @@ public class WebSocket {
         return URLDecoder.decode(decodeStr,"utf-8");
     }
 
-    private static synchronized int getOnlineCount() {
-        return onlineCount;
-    }
-
-    private static synchronized void addOnlineCount() {
-        onlineCount++;
-    }
-
-    private static synchronized void subOnlineCount() {
-        onlineCount--;
-    }
 }
