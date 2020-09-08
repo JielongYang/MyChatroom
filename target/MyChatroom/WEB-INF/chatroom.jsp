@@ -26,6 +26,7 @@
         </div>
     </div>
     <br>
+    <div style="height:auto ; width: auto"><span id="sendTo"></span> <button onclick="changeToPublic()" >群聊模式</button> </div>
     <textarea id="msg_box" rows="6" cols="50" onkeydown="confirm(event)"></textarea><br>
     <input type="button" value="发送" onclick="send()">
 </div>
@@ -69,11 +70,9 @@
      * msg.from : 消息来源
      * msg.content: 消息内容
      */
-    //将username定义为全局变量，以便send（）函数调用
-    var user_name;
     ws.onmessage = function (ev) {
         var msg = JSON.parse(ev.data);
-        var sender, name_list, change_type;
+        var sender,user_name, name_list, change_type;
 
         switch (msg.type) {
             case 'system':
@@ -128,18 +127,35 @@
     /**
      * 发送并清空消息输入框内的消息
      */
+    //一个标记私聊或是群发的flag
+    var sendTo = "public";
     function send() {
         var msg_box = document.getElementById("msg_box");
         var content = msg_box.value;
 
-        // var reg = new RegExp("\r\n", "g");
-        // content = content.replace(reg, "");
 
-        var msg = {'content': content.trim(), 'type': 'user','from':user_name};
+        var reg = new RegExp("\r\n", "g");
+        content = content.replace(reg, "");
+
+
+        var msg = {'content': content.trim(), 'type': 'user','from':userinfo.username,'sendTo':sendTo};
         sendMsg(msg);
         msg_box.value = "";
-        // todo 清除换行符
+
     }
+
+    function chatWith(name) {
+        if (name != userinfo.username) {
+            sendTo = name;
+            var str = "正在和"+ name + "聊天";
+            document.getElementById("sendTo").innerText = str;
+        }
+    }
+    function changeToPublic() {
+        document.getElementById("sendTo").innerText = "";
+        sendTo = "public";
+    }
+
 
     /**
      * 将消息内容添加到输出框中,并将滚动条滚动到最下方
@@ -152,6 +168,7 @@
         msg_list.appendChild(msg);
         msg_list.scrollTop = msg_list.scrollHeight;
     }
+
 
     /**
      * 处理用户登陆消息
@@ -182,14 +199,6 @@
         var data = '系统消息: ' + user_name + ' 已' + change;
 
         listMsg(data);
-        // user.addEventListener("click", ChatWith());
-    }
-
-
-    function chatWith(name) {
-
-        listMsg(name);
-
     }
 
     /**

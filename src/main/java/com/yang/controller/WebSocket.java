@@ -41,11 +41,16 @@ public class WebSocket {
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
         JSONObject jsob = JSONObject.parseObject(message);
-        System.out.println(jsob);
-        for (String key:users.keySet()) {
-            users.get(key).getSession().getBasicRemote().sendText(jsob.toString());
+        if (jsob.get("sendTo").equals("public")) {
+            for (String key:users.keySet()) {
+                users.get(key).getSession().getBasicRemote().sendText(jsob.toString());
+            }
+        } else {
+            String self = (String) jsob.get("from");
+            String to = (String) jsob.get("sendTo");
+            users.get(to).getSession().getBasicRemote().sendText(jsob.toString());
+            users.get(self).getSession().getBasicRemote().sendText(jsob.toString());
         }
-
 
 
         return;
