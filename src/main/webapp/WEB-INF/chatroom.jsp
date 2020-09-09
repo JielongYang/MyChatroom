@@ -80,12 +80,7 @@
             case 'user':
                 sender = msg.from + ': ';
                 break;
-            // case 'handshake':
-            //     var user_info = {'type': 'login', 'content': uname};
-            //     sendMsg(user_info);
-            //     return;
             case 'login':
-            case 'logout':
                 user_name = msg.content;
                 name_list = msg.namelist;
                 change_type = msg.type;
@@ -102,8 +97,7 @@
     };
 
     ws.onclose = function (ev) {
-        listMsg(ev)
-        listMsg(ev.reason)
+        listMsg(ev);
     }
 
 
@@ -131,16 +125,9 @@
     function send() {
         var msg_box = document.getElementById("msg_box");
         var content = msg_box.value;
-
-
-        var reg = new RegExp("\r\n", "g");
-        content = content.replace(reg, "");
-
-
         var msg = {'content': content.trim(), 'type': 'user','from':userinfo.username,'sendTo':sendTo};
         sendMsg(msg);
         msg_box.value = "";
-
     }
 
     function chatWith(name) {

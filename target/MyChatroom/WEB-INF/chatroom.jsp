@@ -14,7 +14,7 @@
 </head>
 <body>
 <div style="width: 800px;height: 600px;margin: 30px auto;text-align: center">
-    <h1>websocket聊天室</h1>
+    <h1>Speechless Chat</h1>
     <div style="width: 800px;border: 1px solid gray;height: 300px;">
         <div style="width: 200px;height: 300px;float: left;text-align: left;">
             <p><span>当前在线:</span><span id="user_num">0</span></p>
@@ -33,7 +33,6 @@
 </body>
 </html>
 <script src="https://www.jq22.com/jquery/jquery-3.3.1.js"></script>
-<script src="reconnecting-websocket.js"></script>
 <script type="text/javascript">
 <%--    发送请求获取当前登录用户名--%>
 //     var username;
@@ -81,12 +80,7 @@
             case 'user':
                 sender = msg.from + ': ';
                 break;
-            // case 'handshake':
-            //     var user_info = {'type': 'login', 'content': uname};
-            //     sendMsg(user_info);
-            //     return;
             case 'login':
-            case 'logout':
                 user_name = msg.content;
                 name_list = msg.namelist;
                 change_type = msg.type;
@@ -103,8 +97,7 @@
     };
 
     ws.onclose = function (ev) {
-        listMsg(ev)
-        listMsg(ev.reason)
+        listMsg(ev);
     }
 
 
@@ -132,16 +125,9 @@
     function send() {
         var msg_box = document.getElementById("msg_box");
         var content = msg_box.value;
-
-
-        var reg = new RegExp("\r\n", "g");
-        content = content.replace(reg, "");
-
-
         var msg = {'content': content.trim(), 'type': 'user','from':userinfo.username,'sendTo':sendTo};
         sendMsg(msg);
         msg_box.value = "";
-
     }
 
     function chatWith(name) {

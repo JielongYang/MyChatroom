@@ -47,11 +47,10 @@ public class WebSocket {
             }
         } else {
             String self = (String) jsob.get("from");
-            String to = (String) jsob.get("sendTo");
-            users.get(to).getSession().getBasicRemote().sendText(jsob.toString());
+            String toUser = (String) jsob.get("sendTo");
+            users.get(toUser).getSession().getBasicRemote().sendText(jsob.toString());
             users.get(self).getSession().getBasicRemote().sendText(jsob.toString());
         }
-
 
         return;
 
@@ -59,10 +58,7 @@ public class WebSocket {
 
     @OnError
     public void onError(Throwable error){
-        System.out.println("WebSocket error");
         error.printStackTrace();
-        System.out.println(error.getStackTrace());
-        System.out.println(error.toString());
     }
 
     @OnClose

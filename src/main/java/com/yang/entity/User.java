@@ -11,8 +11,12 @@ public class User {
     String password;
     private Session session;
 
-    public User(Integer id, String username, String password) {
+    public User(Integer id,String username,String password) {
         this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -57,8 +61,6 @@ public class User {
     public String getUserinfo(){
         JSONObject job = new JSONObject();
         job.put("username",username);
-//        job.put("avatar",avatar);
-//        job.put("nickname",nickname);
         return job.toString();
     }
 }

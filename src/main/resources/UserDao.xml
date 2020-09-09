@@ -4,12 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.yang.dao.UserDao">
-    <select id="getUserById" parameterType="java.lang.Integer" resultType="com.yang.entity.User">
-        select * from user where id= #{id};
+    <select id="getUserByUsername" parameterType="java.lang.String" resultType="com.yang.entity.User">
+        select * from user where username= #{username};
     </select>
 
     <select id="getUSerByUsernameAndPassword"  resultType="User">
         select * from user where username = #{username} and password = #{password};
     </select>
+
+    <insert id="insert" parameterType="java.lang.String" >
+        insert into user(username,password) values(#{username},#{password});
+    </insert>
 
 </mapper>

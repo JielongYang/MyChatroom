@@ -14,8 +14,15 @@ public class UserDaoTest {
     UserDao userDao;
     @Test
     public void getUserById() {
-        User user = userDao.getUserById(2);
+        User user = userDao.getUserByUsername("yang");
         System.out.println(user.getUsername() + user.getPassword());
+    }
+
+    @Test
+    public void insert() {
+        User user = new User("jie","yang");
+        userDao.insert(user);
+
     }
 
 }

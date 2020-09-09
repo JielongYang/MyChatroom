@@ -14,12 +14,18 @@ public class UserServiceImpl implements UserService{
     private UserDao userDao;
 
     @Override
-    public User getUserById(Integer id) {
-        return this.userDao.getUserById(id);
+    public User getUserByUsername(String username) {
+        return this.userDao.getUserByUsername(username);
     }
 
     @Override
     public User getUSerByUsernameAndPassword(String username, String password) {
         return this.userDao.getUSerByUsernameAndPassword(username,password);
+    }
+
+    @Override
+    public int insert(User user) {
+        userDao.insert(user);
+        return 0;
     }
 }

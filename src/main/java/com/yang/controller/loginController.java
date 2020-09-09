@@ -5,13 +5,10 @@ import com.yang.entity.User;
 import com.yang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 @Controller
 public class loginController {
@@ -32,13 +29,25 @@ public class loginController {
 
         return "chatroom";
     }
-
-
-    @RequestMapping("/getUserById")
-    public String getUserById(Integer id, Model model) {
-        User user = userService.getUserById(id);
-        model.addAttribute("user",user);
-        return "user";
+    @RequestMapping("/toRegister")
+    public String toRegister() {
+        return "register";
     }
+
+
+    @RequestMapping("/register")
+    public String registerController(String username, String password, Model model) {
+
+        User checkUsername = userService.getUserByUsername(username);
+        if (checkUsername != null) {
+            model.addAttribute("msg","用户名已存在");
+            return "register";
+        }
+        User user = new User(username,password);
+        userService.insert(user);
+        return "login";
+    }
+
+
 
 }
