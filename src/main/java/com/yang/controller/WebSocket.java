@@ -39,7 +39,7 @@ public class WebSocket {
     }
 
     @OnMessage
-    public void onMessage(String message, Session session) throws IOException {
+    public void onMessage(String message) throws IOException {
         JSONObject jsob = JSONObject.parseObject(message);
         if (jsob.get("sendTo").equals("public")) {
             for (String key:users.keySet()) {
@@ -55,12 +55,10 @@ public class WebSocket {
         return;
 
     }
-
     @OnError
     public void onError(Throwable error){
         error.printStackTrace();
     }
-
     @OnClose
     public void onClose() {
         System.out.println("closed");

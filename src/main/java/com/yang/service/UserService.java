@@ -12,4 +12,6 @@ public interface UserService {
 
     public int insert(User user);
 
+    public int upload(String path, String username);
+
 }

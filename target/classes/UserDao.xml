@@ -12,8 +12,12 @@
         select * from user where username = #{username} and password = #{password};
     </select>
 
-    <insert id="insert" parameterType="java.lang.String" >
+    <insert id="insert" parameterType="com.yang.entity.User" >
         insert into user(username,password) values(#{username},#{password});
     </insert>
+
+    <update id="upload" parameterType="java.lang.String">
+        update user set head = #{head} where username = #{username} ;
+    </update>
 
 </mapper>

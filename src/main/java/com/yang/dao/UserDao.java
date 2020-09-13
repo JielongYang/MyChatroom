@@ -11,4 +11,6 @@ public interface UserDao {
     User getUSerByUsernameAndPassword(@Param("username")String username, @Param("password")String password);
 
     int insert(User user);
+
+    int upload(@Param("head") String head, @Param("username") String username);
 }

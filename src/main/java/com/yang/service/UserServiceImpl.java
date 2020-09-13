@@ -28,4 +28,11 @@ public class UserServiceImpl implements UserService{
         userDao.insert(user);
         return 0;
     }
+
+    @Override
+    public int upload(String path, String username) {
+        return userDao.upload(path, username);
+    }
+
+
 }

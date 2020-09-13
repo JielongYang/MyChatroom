@@ -19,8 +19,8 @@
 		</tr>
 	</table>
 	<div align="middle"><input type="submit" value="登录" id="bt"></div>
-	<div align="middle"><button ><a href="/MyChatroom/toRegister">注册</a></button></div>
 </form>
+	<div align="middle"><button id="toRegister">注册</button></div>
 </body>
 <head>
 		<meta charset="UTF-8">
@@ -38,5 +38,9 @@
 		};
 		sessionStorage.setItem("userinfo",JSON.stringify(userinfo));
 	});
+
+	$("#toRegister").click(function () {
+		window.location.href = "toRegister";
+	})
 
 </script>

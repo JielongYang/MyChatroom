@@ -23,10 +23,11 @@
             </div>
         </div>
         <div id="msg_list" style="width: 598px;border:  1px solid gray; height: 300px;overflow: scroll;float: left;">
+
         </div>
     </div>
     <br>
-    <div style="height:auto ; width: auto"><span id="sendTo"></span> <button onclick="changeToPublic()" >群聊模式</button> </div>
+    <div style="height:auto ; width: auto"><span id="sendTo"></span> <button onclick="changeToPublic()" >群聊模式</button><button id="toMyPage">我的页面</button> </div>
     <textarea id="msg_box" rows="6" cols="50" onkeydown="confirm(event)"></textarea><br>
     <input type="button" value="发送" onclick="send()">
 </div>
@@ -34,23 +35,9 @@
 </html>
 <script src="https://www.jq22.com/jquery/jquery-3.3.1.js"></script>
 <script type="text/javascript">
-<%--    发送请求获取当前登录用户名--%>
-//     var username;
-// $(function () {
-//     $.ajax({
-//         url:"getUsername",
-//         success:function (res) {
-//             username = res;
-//         },
-//         $("#user_list").html(res);
-//
-//         async:false
-//     });
-// })
+    //获取用户登录信息
     var userinfo = eval("("+sessionStorage.getItem("userinfo")+")");
-    console.log(userinfo.username);
     var encodeUserinfo = window.btoa(encodeURIComponent(sessionStorage.getItem("userinfo")));
-//websocket链接地址
     var url = "ws://localhost:8080/MyChatroom/WebSocketLink/" + encodeUserinfo;
     if ('WebSocket' in window) {
         var ws = new WebSocket(url);
@@ -62,13 +49,6 @@
 
     };
 
-    /**
-     * 分析服务器返回信息
-     *
-     * msg.type : user 普通信息;system 系统信息;handshake 握手信息;login 登陆信息; logout 退出信息;
-     * msg.from : 消息来源
-     * msg.content: 消息内容
-     */
     ws.onmessage = function (ev) {
         var msg = JSON.parse(ev.data);
         var sender,user_name, name_list, change_type;
@@ -137,11 +117,14 @@
             document.getElementById("sendTo").innerText = str;
         }
     }
+    $("#toMyPage").click(function () {
+        window.location.href = "toMyPage";
+
+    });
     function changeToPublic() {
         document.getElementById("sendTo").innerText = "";
         sendTo = "public";
     }
-
 
     /**
      * 将消息内容添加到输出框中,并将滚动条滚动到最下方
@@ -149,12 +132,14 @@
     function listMsg(data) {
         var msg_list = document.getElementById("msg_list");
         var msg = document.createElement("p");
+        var head = document.createElement("img");
+        head.setAttribute("src","img/" + userinfo.username + ".png");
 
+        // var img = "<img href = " + "C:/javaProject/MyChatroom/" + userinfo.username
         msg.innerHTML = data;
         msg_list.appendChild(msg);
         msg_list.scrollTop = msg_list.scrollHeight;
     }
-
 
     /**
      * 处理用户登陆消息
@@ -176,8 +161,6 @@
             user.setAttribute('onclick','chatWith("'+name_list[index]+'")');
             user_list.appendChild(user);
         }
-        // var onlineUser = user_list.getElementsByTagName("p");
-
         user_num.innerHTML = name_list.length;
         user_list.scrollTop = user_list.scrollHeight;
         var change = type == 'login' ? '上线' : '下线';

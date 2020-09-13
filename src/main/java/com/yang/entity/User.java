@@ -10,16 +10,31 @@ public class User {
     String username;
     String password;
     private Session session;
+    private byte[] head;
+    private String headPath;
 
-    public User(Integer id,String username,String password) {
+
+    public User(Integer id, String username, String password, String headPath) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.headPath = headPath;
     }
-    public User(String username, String password) {
+    public User(Integer id, String username, String password) {
+        this.id = id;
         this.username = username;
         this.password = password;
+        this.headPath = "";
     }
+    public User(String username, String headPath) {
+        this.username = username;
+        this.headPath = headPath;
+    }
+
+//    public User(String username, String password) {
+//        this.username = username;
+//        this.password = password;
+//    }
 
     public User(String username,Session session) {
         this.username = username;
@@ -56,6 +71,21 @@ public class User {
 
     public void setSession(Session session) {
         this.session = session;
+    }
+    public String getHeadPath() {
+        return headPath;
+    }
+
+    public void setHeadPath(String headPath) {
+        this.headPath = headPath;
+    }
+
+    public byte[] getHead() {
+        return head;
+    }
+
+    public void setHead(byte[] head) {
+        this.head = head;
     }
 
     public String getUserinfo(){

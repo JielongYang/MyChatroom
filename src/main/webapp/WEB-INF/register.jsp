@@ -16,10 +16,17 @@
             <td><input type="password" name="password"></td>
         </tr>
         <tr>
-            <td><input type="submit" value="注册" id="bt"></td>
             <td>${msg}</td>
         </tr>
     </table>
+    <div align="middle"><input type="submit" value="注册"></div>
 </form>
+    <div align="middle"><button id="returnToLogin">返回登录</button</div>
 </body>
 </html>
+<script src="https://www.jq22.com/jquery/jquery-3.3.1.js"></script>
+<script>
+    $("#returnToLogin").click(function () {
+        window.location.href = "returnToLogin";
+    });
+</script>
