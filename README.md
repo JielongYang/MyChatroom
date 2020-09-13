@@ -6,7 +6,7 @@ Java后台练习小项目
 
 基本页面如下：
 
-<img src="https://github.com/blacksheep380/MyChatroom/tree/master/img/登录页面.png" alt="登录页面" style="zoom: 67%;" />
+<img src="https://github.com/blacksheep380/MyChatroom/master/img/登录页面.png" alt="登录页面" style="zoom: 67%;" />
 <img src="https://github.com/blacksheep380/MyChatroom/tree/master/img/注册页面.png" alt="注册页面" style="zoom:60%;" />
 <img src="https://github.com/blacksheep380/MyChatroom/tree/master/img/聊天室页面.png" alt="聊天室页面" style="zoom:60%;" />
 项目结构：
