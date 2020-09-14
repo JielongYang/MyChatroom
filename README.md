@@ -6,15 +6,15 @@ Java后台练习小项目
 
 基本页面如下：
 
-<img src="https://github.com/blacksheep380/MyChatroom/master/img/登录页面.png" alt="登录页面" style="zoom: 67%;" />
+<img src="https://github.com/blacksheep380/MyChatroom/raw/master/img/登录页面.PNG" alt="登录页面" style="zoom: 60%;" />
 <img src="https://github.com/blacksheep380/MyChatroom/raw/master/img/注册页面.PNG" alt="注册页面" style="zoom:60%;" />
-<img src="https://github.com/blacksheep380/MyChatroom/raw/master/img/聊天室页面.png" alt="聊天室页面" style="zoom:60%;" />
+<img src="https://github.com/blacksheep380/MyChatroom/raw/master/img/聊天室页面.PNG" alt="聊天室页面" style="zoom:60%;" />
 项目结构：
-<img src="https://github.com/blacksheep380/MyChatroom/tree/master/img/项目结构.png" alt="项目结构" style="zoom:60%;" />
+<img src="https://github.com/blacksheep380/MyChatroom/raw/master/img/项目结构.PNG" alt="项目结构" style="zoom:60%;" />
 
 
 loginController主要用于完成登录验证和注册功能，代码如下：
-<img src="https://github.com/blacksheep380/MyChatroom/tree/master/img/loginController.PNG" alt="loginController" style="zoom:60%;" />
+<img src="https://github.com/blacksheep380/MyChatroom/raw/master/img/loginController.PNG" alt="loginController" style="zoom:60%;" />
 
 
 项目核心功能是基于WebSocket的在线聊天功能，主要分为JavaScript编写的客户端和Java编写的服务端，由前端发送信息到服务端再广播给其他用户。主要执行流程如下：
