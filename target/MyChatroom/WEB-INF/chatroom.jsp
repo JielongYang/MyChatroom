@@ -44,11 +44,9 @@
     }else {
         alert('当前浏览器不支持WebSocket')
     }
-
     ws.onopen = function () {
 
     };
-
     ws.onmessage = function (ev) {
         var msg = JSON.parse(ev.data);
         var sender,user_name, name_list, change_type;
@@ -75,7 +73,6 @@
         var data = "系统消息 : 出错了,请退出重试.";
         listMsg(data);
     };
-
     ws.onclose = function (ev) {
         listMsg(ev);
     }

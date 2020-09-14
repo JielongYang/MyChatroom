@@ -25,4 +25,9 @@ public class UserDaoTest {
 
     }
 
+    @Test
+    public void updateUsername() {
+        userDao.updateUsername("long","root");
+    }
+
 }

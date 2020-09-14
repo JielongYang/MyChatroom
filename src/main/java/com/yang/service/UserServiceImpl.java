@@ -34,5 +34,10 @@ public class UserServiceImpl implements UserService{
         return userDao.upload(path, username);
     }
 
+    @Override
+    public int updateUsername(String username, String newUsername) {
+        return  userDao.updateUsername(username, newUsername);
+    }
+
 
 }

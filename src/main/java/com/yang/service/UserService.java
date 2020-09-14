@@ -14,4 +14,6 @@ public interface UserService {
 
     public int upload(String path, String username);
 
+    public int updateUsername(String username, String newUsername);
+
 }

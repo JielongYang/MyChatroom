@@ -27,4 +27,7 @@ loginController主要用于完成登录验证和注册功能，代码如下：
 
 4.客户端向服务端发送json数据由服务端onmessage方法接收并处理。
 
-更多细节如广播和私聊功能的实现、文件上传功能可自行阅读源码。
+私聊功能：
+<img src="https://github.com/blacksheep380/MyChatroom/raw/master/img/私聊.PNG" alt="loginController" style="zoom:60%;" />
+我的页面：
+<img src="https://github.com/blacksheep380/MyChatroom/raw/master/img/我的页面.PNG" alt="loginController" style="zoom:60%;" />

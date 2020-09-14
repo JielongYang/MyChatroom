@@ -30,4 +30,16 @@ public class UserController {
 
         return "MyChatroom";
     }
+
+    @RequestMapping("/changeUsername")
+    public String changeUsername(String username,String newUsername) {
+        userService.updateUsername(username, newUsername);
+
+        return "myPage";
+    }
+
+    @RequestMapping("/returnToChatroom")
+    public String returnToChatroom() {
+        return "chatroom";
+    }
 }

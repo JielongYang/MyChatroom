@@ -13,4 +13,6 @@ public interface UserDao {
     int insert(User user);
 
     int upload(@Param("head") String head, @Param("username") String username);
+
+    int updateUsername(String username,String newUsername);
 }

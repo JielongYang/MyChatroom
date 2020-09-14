@@ -20,4 +20,8 @@
         update user set head = #{head} where username = #{username} ;
     </update>
 
+    <update id="updateUsername" parameterType="java.lang.String">
+        update user set username = #{param2} where username = #{param1} ;
+    </update>
+
 </mapper>
