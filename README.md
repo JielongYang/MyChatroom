@@ -31,3 +31,7 @@ loginController主要用于完成登录验证和注册功能，代码如下：
 <img src="https://github.com/blacksheep380/MyChatroom/raw/master/img/私聊.PNG" alt="loginController" style="zoom:60%;" />
 我的页面：
 <img src="https://github.com/blacksheep380/MyChatroom/raw/master/img/我的页面.PNG" alt="loginController" style="zoom:60%;" />
+上传头像后：
+<img src="https://github.com/blacksheep380/MyChatroom/raw/master/img/上传头像后.PNG" alt="loginController" style="zoom:80%;" />
+
+未完待续
